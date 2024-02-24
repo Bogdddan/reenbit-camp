@@ -1,10 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import travelSlice from "./slice";
+import rootReducer from "./reducers";
 
 const store = configureStore({
-  reducer: {
-    travel: travelSlice.reducer
-  },
+  reducer: rootReducer,
 });
 
 export default store;
