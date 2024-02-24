@@ -1,0 +1,1 @@
+export const trip = state => state.trip;

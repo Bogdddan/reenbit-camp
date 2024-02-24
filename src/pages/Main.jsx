@@ -7,7 +7,6 @@ function Main() {
 
   return (
     <div>
-    
 			 <Modal/>
     </div>
   );
