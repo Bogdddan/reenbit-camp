@@ -3,7 +3,14 @@ import { createSlice } from "@reduxjs/toolkit";
 const travelSlice = createSlice({
   name: 'travel',
   initialState: {
-    trips: [],
+    trips: [
+      {
+        id: 1,
+        country: "Україна",
+        arrivalDate: "2024-02-24",
+        departureDate: "2024-02-25",
+      },
+    ],
   },
   reducers: {
     addTrip(state, action){
