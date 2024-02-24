@@ -4,12 +4,12 @@ const travelSlice = createSlice({
   name: 'travel',
   initialState: {
     trips: [
-      {
-        id: 1,
-        country: "Україна",
-        arrivalDate: "2024-02-24",
-        departureDate: "2024-02-25",
-      },
+      // {
+      //   id: 1,
+      //   country: "Україна",
+      //   arrivalDate: "2024-02-24",
+      //   departureDate: "2024-02-25",
+      // },
     ],
   },
   reducers: {
@@ -30,3 +30,5 @@ const travelSlice = createSlice({
 })
 
 export default travelSlice;
+
+export const { addTrip, removeTrip, updateTrip } = travelSlice.actions;

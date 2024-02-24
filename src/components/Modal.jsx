@@ -1,10 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, } from "react-redux";
-// import { getTrips } from "../redux/selectors";
-// import { UseSelector } from "react-redux";
-import addTrip from '../redux/slice';
-// import removeTrip from '../redux/slice';
-// import updateTrip from '../redux/slice';
+
+import {addTrip} from '../redux/slice';
 
 
 function Modal() {
@@ -24,25 +21,13 @@ function Modal() {
   // Date
   const handleSubmit = () => {
     dispatch(addTrip({
-      country,
-      arrivalDate,
-      departureDate,
+      country: country,
+      arrivalDate: arrivalDate,
+      departureDate: departureDate,
     }));
     // Close modal
     handleClose();
   };
-  // const handleRemoveTrip = (id) => {
-  //   dispatch(removeTrip(id));
-  // };
-  // const handleUpdateTrip = (id) => {
-  //   dispatch(updateTrip({
-  //     id,
-  //     country,
-  //     arrivalDate,
-  //     departureDate,
-  //   })
-  //   );
-  // };
 
   return (
     <>
