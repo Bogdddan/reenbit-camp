@@ -1,11 +1,13 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getTrips } from "../../redux/selectors";
 import { removeTrip } from '../../redux/slice';
-import Modal from "../../components/Modal";
+import Modal from "../../components/modal/Modal";
 import css from './main.module.css';
 
 function Main() {
+
+  const [country, setCountry] = useState('');
 
   const API_KEY = 'TVPXXTTYAYBBW7WF45YWSAJL6';
 
@@ -19,14 +21,15 @@ function Main() {
 
   const handleCountryClick = (country) => {
     console.log(country);
+    setCountry(country);
   }
 
   // test api
   useEffect(() => {
-    fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/kalush/2024-02-25/2024-02-27?key=${API_KEY}`)
+    fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/2024-02-25/2024-02-27?key=${API_KEY}`)
       .then(r => r.json())
       .then(data => console.log(data))
-  }, [])
+  }, [country])
 
   return (
     <div>
@@ -39,7 +42,7 @@ function Main() {
         </div>
       ))}
       
-        <div>Country {}</div>
+        <div>Country clicked {country}</div>
       
       <Modal />
     </div>

@@ -1,0 +1,25 @@
+.modal {
+
+  /* stuff we already covered */
+
+  z-index: 1010;
+
+}
+.modal-overlay {
+
+  /* recommendation:
+     don't focus on the number "1000" here, but rather,
+     you should have a documented system for z-index and 
+     follow that system. This number should be pretty
+     high on the scale in that system.
+  */
+  z-index: 1000;
+  background-color: gray;
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+
+}
