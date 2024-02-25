@@ -1,8 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getTrips } from "../redux/selectors";
-import { removeTrip } from '../redux/slice';
-import Modal from "../components/Modal";
+import { getTrips } from "../../redux/selectors";
+import { removeTrip } from '../../redux/slice';
+import Modal from "../../components/Modal";
+import css from './main.module.css';
 
 function Main() {
 
@@ -15,11 +16,10 @@ function Main() {
   };
 
 
-
   return (
     <div>
       {trips.map((trip) => (
-        <div key={trip.id}>
+        <div className={css.block} key={trip.id}>
           <h1>{trip.country}</h1>
           <p>Date of arrival:{trip.arrivalDate}</p>
           <p>Date of departure:{trip.departureDate}</p>

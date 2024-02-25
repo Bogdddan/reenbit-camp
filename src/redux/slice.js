@@ -10,6 +10,12 @@ const travelSlice = createSlice({
       //   arrivalDate: "2024-02-24",
       //   departureDate: "2024-02-25",
       // },
+       // {
+      //   id: 2,
+      //   country: "Пакістан",
+      //   arrivalDate: "2024-03-24",
+      //   departureDate: "2024-03-25",
+      // },
     ],
   },
   reducers: {
