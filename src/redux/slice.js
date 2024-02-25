@@ -10,7 +10,7 @@ const travelSlice = createSlice({
       //   arrivalDate: "2024-02-24",
       //   departureDate: "2024-02-25",
       // },
-       // {
+      //  {
       //   id: 2,
       //   country: "Пакістан",
       //   arrivalDate: "2024-03-24",
@@ -22,9 +22,15 @@ const travelSlice = createSlice({
     addTrip(state, action){
       state.trips.push(action.payload);
     },
+    // removeTrip(state, action){
+    //   const index = state.trips.findIndex((trip) => trip.id === action.payload);
+    //   state.trips.splice(index, 1);
+    // },
     removeTrip(state, action){
-      const index = state.trips.findIndex((trip) => trip.id === action.payload);
-      state.trips.splice(index, 1);
+      const index = state.trips.findIndex((trip) => trip.country === action.payload);
+      if (index !== -1) {
+        state.trips.splice(index, 1);
+      }
     },
     updateTrip(state, action){
       const trip = state.trips.find((trip) => trip.id === action.payload);

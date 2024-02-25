@@ -35,7 +35,7 @@ function Main() {
           <h1>{trip.country}</h1>
           <p>Date of arrival:{trip.arrivalDate}</p>
           <p>Date of departure:{trip.departureDate}</p>
-          <button onClick={() => handleRemoveTrip(trip.id)}>Remove</button>
+          <button onClick={() => handleRemoveTrip(trip.country)}>Remove</button>
         </div>
       ))}
       
