@@ -7,7 +7,10 @@ import css from './main.module.css';
 
 function Main() {
 
+  const [searchCountry, setSearchCountry] = useState('');
   const [country, setCountry] = useState('');
+  const [arrivalDate, setArrivalDate] = useState('');
+  const [departureDate, setDepartureDate] = useState('');
 
   const API_KEY = 'TVPXXTTYAYBBW7WF45YWSAJL6';
 
@@ -15,9 +18,13 @@ function Main() {
   console.log(trips);
   const dispatch = useDispatch();
 
+  // Delete Trip
   const handleRemoveTrip = (id) => {
     dispatch(removeTrip(id));
   };
+
+  // Filter trips
+  const filteredTrips = trips.filter(trip => trip.country.toLowerCase().includes(searchCountry.toLowerCase()));
 
   const handleCountryClick = (country) => {
     console.log(country);
@@ -32,21 +39,34 @@ function Main() {
   }, [country])
 
   return (
+    // <div>
+    //   <input type="text" placeholder="Search your trip" />
+    //   {trips.map((trip) => (
+    //     <div onClick={() => handleCountryClick(trip.country)} className={css.block} key={trip.id}>
+    //       <h1>{trip.country}</h1>
+    //       <p>Date of arrival:{trip.arrivalDate}</p>
+    //       <p>Date of departure:{trip.departureDate}</p>
+    //       <button onClick={() => handleRemoveTrip(trip.country)}>Remove</button>
+    //     </div>
+    //   ))}
     <div>
-      {trips.map((trip) => (
-        <div onClick={() => handleCountryClick(trip.country)} className={css.block} key={trip.id}>
+      <input type="text" placeholder="Search your trip" value={searchCountry} onChange={(e) => setSearchCountry(e.target.value)} />
+      {filteredTrips.length > 0 && <h2>Search results:</h2>}
+      {filteredTrips.map((trip) => (
+        <div className={css.block} key={trip.id}>
           <h1>{trip.country}</h1>
           <p>Date of arrival:{trip.arrivalDate}</p>
           <p>Date of departure:{trip.departureDate}</p>
           <button onClick={() => handleRemoveTrip(trip.country)}>Remove</button>
         </div>
       ))}
-      
-        <div>Country clicked {country}</div>
-      
+
+      <div>Country clicked {country}</div>
+
       <Modal />
     </div>
   );
 }
+
 
 export default Main;
