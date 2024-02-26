@@ -5,6 +5,7 @@ import { removeTrip } from '../../redux/slice';
 import Modal from "../../components/modal/Modal";
 import { getWeatherData } from "../../redux/selectors";
 import { setWeatherData } from "../../redux/slice";
+import DataTimer from "../../components/timer/DataTimer";
 import './main.css';
 
 function Main() {
@@ -14,8 +15,10 @@ function Main() {
   const [arrivalDate, setArrivalDate] = useState('');
   const [departureDate, setDepartureDate] = useState('');
 
-  const API_KEY = 'TVPXXTTYAYBBW7WF45YWSAJL6';
-  // const API_KEY = '';
+  // unvalid
+  // const API_KEY = 'TVPXXTTYAYBBW7WF45YWSAJL6';
+  // valid
+  const API_KEY = 'GSEVSL93UQVQ6URJBKG5VFDXE';
 
   const trips = useSelector(getTrips);
   // console.log(trips);
@@ -40,6 +43,7 @@ function Main() {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
+      // weather for now // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[city]/today?unitGroup=metric&amp;include=days&amp;key=YOUR_API_KEY
         const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/${arrivalDate}/${departureDate}?key=${API_KEY}`);
         const data = await response.json();
 
@@ -61,27 +65,34 @@ function Main() {
   const weatherData = useSelector(getWeatherData);
 
   return (
-    <div>
-      <input type="text" placeholder="Search your trip" value={searchCountry} onChange={(e) => setSearchCountry(e.target.value)} />
-      <div className="trips-list">
-        {filteredTrips.map((trip) => (
-          <div onClick={() => handleCountryClick(trip)} className='block' key={trip.id}>
-            <h1>{trip.country}</h1>
-            <p>Date of arrival:{trip.arrivalDate}</p>
-            <p>Date of departure:{trip.departureDate}</p>
-            <button onClick={() => handleRemoveTrip(trip.country)}>Remove</button>
-          </div>
-        ))}
-        <Modal />
-      </div>
-      {/*  displaying weather data in current city */}
-      {weatherData && (
-        <div>
-          {weatherData.days.map((day) => (
-            <div>{day.temp}</div>
+    <div className="windows">
+      <div className="container">
+        <input className="search-input" type="text" placeholder="Search your trip" value={searchCountry} onChange={(e) => setSearchCountry(e.target.value)} />
+        <div className="trips-list">
+          {filteredTrips.map((trip) => (
+            <div onClick={() => handleCountryClick(trip)} className='block' key={trip.id}>
+              <h1>{trip.country}</h1>
+              <div>
+                <span>{trip.arrivalDate}</span>
+                <span>{trip.departureDate}</span>
+              </div>
+              <button onClick={() => handleRemoveTrip(trip.country)}>Remove</button>
+            </div>
           ))}
+          <Modal />
         </div>
-      )}
+        {/*  displaying weather data in current city */}
+        {weatherData && (
+          <span>
+            {weatherData.days.map((day) => (
+              <div>{day.temp}</div>
+            ))}
+          </span>
+        )}
+      </div>
+      <div>
+        <DataTimer />
+      </div>
     </div>
   );
 }

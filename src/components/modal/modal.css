@@ -21,14 +21,65 @@
   padding: 20px;
   border-radius: 5px;
   box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2); /* Optional drop shadow */
+  width: 800px;
+  height: 600px;
 }
-.close-btn{
+.close-section{
   display: flex;
   justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.close-button{
+  background-color: transparent;
+  border: none;
+}
+
+.close{
+  display: inline;
+  width: 40px;
+  height: 40px;
 }
 
 .button-add{
   width: 222px;
   height: 222px;
   border: 1px solid black;
+}
+
+.button{
+  color: black;
+  width: 60px;
+  height: 30px;
+  border-radius: 2px;
+  border: 1px solid black;
+}
+
+.button.save{
+  border: none;
+  color: white;
+  background-color: blue;
+}
+
+.modal-input{
+  margin-bottom: 30px;
+  width: 99%;
+  height: 30px;
+}
+
+p{
+  font-size: large;
+  font-style: bold;
+}
+
+.actions-button{
+  display: flex;
+  justify-content: end;
+  gap: 10px;
+  margin-top: 200px;
+}
+
+.label-for-input{
+  font-size: 18px;
+  margin-bottom: 10px;
 }
