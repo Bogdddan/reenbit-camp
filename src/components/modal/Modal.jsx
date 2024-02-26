@@ -72,7 +72,7 @@ function Modal() {
 
   return (
     <>
-      <button onClick={handleOpen}>Add trip</button>
+     <button className="button-add" onClick={handleOpen}>Add trip</button>
       {isOpen && (
         <div className="moodal">
           <div className="modal-content">

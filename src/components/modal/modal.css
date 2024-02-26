@@ -26,3 +26,9 @@
   display: flex;
   justify-content: space-between;
 }
+
+.button-add{
+  width: 222px;
+  height: 222px;
+  border: 1px solid black;
+}

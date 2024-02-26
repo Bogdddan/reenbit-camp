@@ -29,7 +29,7 @@ function Main() {
   const filteredTrips = trips.filter(trip => trip.country.toLowerCase().includes(searchCountry.toLowerCase()));
 
   const handleCountryClick = (trip) => {
-    console.log(trip.country);
+    // console.log(trip.country);
     setCountry(trip.country);
     setArrivalDate(trip.arrivalDate);
     setDepartureDate(trip.departureDate);
@@ -41,7 +41,7 @@ function Main() {
       try {
         const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/${arrivalDate}/${departureDate}?key=${API_KEY}`);
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         setWeatherData(data);
       } catch (error) {
         console.error('Помилка отримання даних погоди:', error);
@@ -66,6 +66,7 @@ function Main() {
             <button onClick={() => handleRemoveTrip(trip.country)}>Remove</button>
           </div>
         ))}
+        <Modal />
       </div>
       {/*  displaying weather data in current city */}
       {weatherData && (
@@ -75,7 +76,6 @@ function Main() {
           ))}
         </div>
       )}
-      <Modal />
     </div>
   );
 }
