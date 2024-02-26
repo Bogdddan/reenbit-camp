@@ -3,6 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTrips } from "../../redux/selectors";
 import { removeTrip } from '../../redux/slice';
 import Modal from "../../components/modal/Modal";
+import { getWeatherData } from "../../redux/selectors";
+import { setWeatherData } from "../../redux/slice";
 import './main.css';
 
 function Main() {
@@ -11,7 +13,6 @@ function Main() {
   const [country, setCountry] = useState('');
   const [arrivalDate, setArrivalDate] = useState('');
   const [departureDate, setDepartureDate] = useState('');
-  const [weatherData, setWeatherData] = useState(null);
 
   const API_KEY = 'TVPXXTTYAYBBW7WF45YWSAJL6';
   // const API_KEY = '';
@@ -41,8 +42,12 @@ function Main() {
       try {
         const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/${arrivalDate}/${departureDate}?key=${API_KEY}`);
         const data = await response.json();
-        // console.log(data);
-        setWeatherData(data);
+
+        console.log(data);
+        dispatch(setWeatherData(data));
+        if (country) {
+          fetchWeather();
+        }
       } catch (error) {
         console.error('Помилка отримання даних погоди:', error);
       }
@@ -51,9 +56,10 @@ function Main() {
     if (country) {
       fetchWeather();
     }
-  }, [country, arrivalDate, departureDate]);
+  }, [country, arrivalDate, departureDate, dispatch]);
 
-  console.log('weather', weatherData);
+  const weatherData = useSelector(getWeatherData);
+
   return (
     <div>
       <input type="text" placeholder="Search your trip" value={searchCountry} onChange={(e) => setSearchCountry(e.target.value)} />

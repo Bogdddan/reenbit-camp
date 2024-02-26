@@ -3,20 +3,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const travelSlice = createSlice({
   name: 'travel',
   initialState: {
-    trips: [
-      // {
-      //   id: 1,
-      //   country: "Україна",
-      //   arrivalDate: "2024-02-24",
-      //   departureDate: "2024-02-25",
-      // },
-      //  {
-      //   id: 2,
-      //   country: "Пакістан",
-      //   arrivalDate: "2024-03-24",
-      //   departureDate: "2024-03-25",
-      // },
-    ],
+    trips: [],
+    weatherData: null,
   },
   reducers: {
     addTrip(state, action){
@@ -34,9 +22,12 @@ const travelSlice = createSlice({
       trip.arrivalDate = action.payload.arrivalDate;
       trip.departureDate = action.payload.departureDate;
     },
+    setWeatherData(state, action) {
+      state.weatherData = action.payload;
+    },
   }
 })
 
 export default travelSlice;
 
-export const { addTrip, removeTrip, updateTrip } = travelSlice.actions;
+export const { addTrip, removeTrip, updateTrip, setWeatherData } = travelSlice.actions;
