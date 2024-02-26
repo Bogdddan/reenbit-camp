@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, } from "react-redux";
 import { addTrip } from '../../redux/slice';
+import './modal.css';
 
 
 function Modal() {
@@ -64,32 +65,41 @@ function Modal() {
     handleClose();
   };
 
+  const handleCancel = () => {
+
+  };
+
   return (
     <>
       <button onClick={handleOpen}>Add trip</button>
       {isOpen && (
         <div className="moodal">
           <div className="modal-content">
+            <p>Create Trip</p>
             <form action="">
+              <div>City</div>
               <input
                 type="text"
-                placeholder="Country"
+                placeholder="Please select your city"
                 value={country}
                 onChange={(e) => setCountry(e.target.value)}
               />
+              <div>Start Date</div>
               <input
                 type="date"
-                placeholder="Arrival Date"
+                placeholder="Select Date"
                 value={arrivalDate}
                 onChange={(e) => setArrivalDate(e.target.value)}
               />
+              <div>End Date</div>
               <input
                 type="date"
-                placeholder="Departure Date"
+                placeholder="Select Date"
                 value={departureDate}
                 onChange={(e) => setDepartureDate(e.target.value)}
               />
-              <button onClick={handleSubmit}>Add Trip</button>
+              <button onClick={handleSubmit}>Save</button>
+              <button onClick={handleCancel}>Cancel</button>
             </form>
             <button className="close" onClick={handleClose}>&times;</button>
           </div>

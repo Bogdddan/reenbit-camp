@@ -11,9 +11,10 @@ function Main() {
   const [country, setCountry] = useState('');
   const [arrivalDate, setArrivalDate] = useState('');
   const [departureDate, setDepartureDate] = useState('');
-  const [weatherData, setWeatherData] = useState(null); // Додайте стан для weatherData
+  const [weatherData, setWeatherData] = useState(null);
 
   const API_KEY = 'TVPXXTTYAYBBW7WF45YWSAJL6';
+  // const API_KEY = '';
 
   const trips = useSelector(getTrips);
   // console.log(trips);

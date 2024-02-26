@@ -22,10 +22,6 @@ const travelSlice = createSlice({
     addTrip(state, action){
       state.trips.push(action.payload);
     },
-    // removeTrip(state, action){
-    //   const index = state.trips.findIndex((trip) => trip.id === action.payload);
-    //   state.trips.splice(index, 1);
-    // },
     removeTrip(state, action){
       const index = state.trips.findIndex((trip) => trip.country === action.payload);
       if (index !== -1) {
