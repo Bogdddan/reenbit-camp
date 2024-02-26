@@ -2,7 +2,7 @@
     list-style: none;
     margin: 0;
     padding: 0;
-    width: max-content;
+    /* width: max-content; */
 }
 
 .block{
@@ -10,4 +10,10 @@
     padding: 10px;
     width: 200px;
     height: 200px;
+}
+
+.trips-list{
+    display: flex;
+    flex-direction: row;
+    margin: 10px 20px;
 }

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTrips } from "../../redux/selectors";
 import { removeTrip } from '../../redux/slice';
 import Modal from "../../components/modal/Modal";
-import css from './main.module.css';
+import './main.css';
 
 function Main() {
 
@@ -53,14 +53,16 @@ function Main() {
   return (
     <div>
       <input type="text" placeholder="Search your trip" value={searchCountry} onChange={(e) => setSearchCountry(e.target.value)} />
-      {filteredTrips.map((trip) => (
-        <div onClick={() => handleCountryClick(trip.country)} className={css.block} key={trip.id}>
-          <h1>{trip.country}</h1>
-          <p>Date of arrival:{trip.arrivalDate}</p>
-          <p>Date of departure:{trip.departureDate}</p>
-          <button onClick={() => handleRemoveTrip(trip.country)}>Remove</button>
-        </div>
-      ))}
+      <div className="trips-list">
+        {filteredTrips.map((trip) => (
+          <div onClick={() => handleCountryClick(trip.country)} className='block' key={trip.id}>
+            <h1>{trip.country}</h1>
+            <p>Date of arrival:{trip.arrivalDate}</p>
+            <p>Date of departure:{trip.departureDate}</p>
+            <button onClick={() => handleRemoveTrip(trip.country)}>Remove</button>
+          </div>
+        ))}
+      </div>
       {/*  displaying weather data in current city */}
       {weatherData && (
         <div>
