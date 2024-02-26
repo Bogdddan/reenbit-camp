@@ -28,16 +28,18 @@ function Main() {
   // Filter trips
   const filteredTrips = trips.filter(trip => trip.country.toLowerCase().includes(searchCountry.toLowerCase()));
 
-  const handleCountryClick = (country) => {
-    // console.log(country);
-    setCountry(country);
+  const handleCountryClick = (trip) => {
+    console.log(trip.country);
+    setCountry(trip.country);
+    setArrivalDate(trip.arrivalDate);
+    setDepartureDate(trip.departureDate);
   }
 
   // Отримайте дані погоди та відобразіть їх
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/2024-02-25/2024-02-27?key=${API_KEY}`);
+        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/${arrivalDate}/${departureDate}?key=${API_KEY}`);
         const data = await response.json();
         console.log(data);
         setWeatherData(data);
@@ -49,13 +51,15 @@ function Main() {
     if (country) {
       fetchWeather();
     }
-  }, [country]);
+  }, [country, arrivalDate, departureDate]);
+
+  console.log('weather', weatherData);
   return (
     <div>
       <input type="text" placeholder="Search your trip" value={searchCountry} onChange={(e) => setSearchCountry(e.target.value)} />
       <div className="trips-list">
         {filteredTrips.map((trip) => (
-          <div onClick={() => handleCountryClick(trip.country)} className='block' key={trip.id}>
+          <div onClick={() => handleCountryClick(trip)} className='block' key={trip.id}>
             <h1>{trip.country}</h1>
             <p>Date of arrival:{trip.arrivalDate}</p>
             <p>Date of departure:{trip.departureDate}</p>
@@ -66,9 +70,6 @@ function Main() {
       {/*  displaying weather data in current city */}
       {weatherData && (
         <div>
-          <p>Temperature: {weatherData.currentConditions.temp}</p>
-          <p>Feels like: {weatherData.currentConditions.feelslike}</p>
-          <p>Humidity: {weatherData.currentConditions.humidity}</p>
           {weatherData.days.map((day) => (
             <div>{day.temp}</div>
           ))}

@@ -43,6 +43,7 @@ function Modal() {
 
 
     const arrivalDateObject = new Date(arrivalDate);
+    console.log('arrivalDateObject', arrivalDateObject);
     const departureDateObject = new Date(departureDate);
 
     if (arrivalDateObject >= departureDateObject) {
@@ -66,7 +67,7 @@ function Modal() {
   };
 
   const handleCancel = () => {
-
+    setIsOpen(false);
   };
 
   return (
@@ -75,7 +76,10 @@ function Modal() {
       {isOpen && (
         <div className="moodal">
           <div className="modal-content">
-            <p>Create Trip</p>
+            <div className="close-btn">
+              <p>Create Trip</p>
+              <button className="close" onClick={handleClose}>&times;</button>
+            </div>
             <form action="">
               <div>City</div>
               <input
@@ -101,7 +105,7 @@ function Modal() {
               <button onClick={handleSubmit}>Save</button>
               <button onClick={handleCancel}>Cancel</button>
             </form>
-            <button className="close" onClick={handleClose}>&times;</button>
+
           </div>
         </div>
       )}
