@@ -3,14 +3,7 @@ import { createSlice } from "@reduxjs/toolkit";
 const travelSlice = createSlice({
   name: 'travel',
   initialState: {
-    trips: [
-     {
-        id: 1,
-        country: "Ukraine",
-        arrivalDate: "2024-03-24",
-        departureDate: "2024-03-25",
-      },
-    ],
+    trips: [],
     weatherData: null,
     currentWeather: null,
   },

@@ -4,19 +4,13 @@ import { useSelector } from "react-redux";
 
 function DataTimer() {
   const weatherData = useSelector(getCurrentWeather);
-  console.log('weather data', weatherData);
+  // console.log('weather data', weatherData);
 
   return (
-    // <>
-    //   {weatherData ? (
-    //     <>
-    //       {/* Відображення таймера та погодних даних */}
-    //     </>
-    //   ) : (
-    //     <p>Завантаження погодних даних...</p>
-    //   )}
-    // </>
-    <>fdffd</>
+    <>
+    <div>current weather</div>
+      {/* {weatherData.currentConditions.temp} */}
+    </>
   );
 }
 
