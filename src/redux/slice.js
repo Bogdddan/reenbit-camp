@@ -12,6 +12,7 @@ const travelSlice = createSlice({
       },
     ],
     weatherData: null,
+    currentWeather: null,
   },
   reducers: {
     addTrip(state, action){
@@ -32,9 +33,12 @@ const travelSlice = createSlice({
     setWeatherData(state, action) {
       state.weatherData = action.payload;
     },
+    setCurrentWeather(state, action){
+      state.currentWeather = action.payload;
+    }
   }
 })
 
 export default travelSlice;
 
-export const { addTrip, removeTrip, updateTrip, setWeatherData } = travelSlice.actions;
+export const { addTrip, removeTrip, updateTrip, setWeatherData, setCurrentWeather } = travelSlice.actions;

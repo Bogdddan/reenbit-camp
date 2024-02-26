@@ -1,9 +1,9 @@
 import React from "react";
-import { getWeatherData } from "../../redux/selectors";
+import { getCurrentWeather } from "../../redux/selectors";
 import { useSelector } from "react-redux";
 
 function DataTimer() {
-  const weatherData = useSelector(getWeatherData);
+  const weatherData = useSelector(getCurrentWeather);
   console.log('weather data', weatherData);
 
   return (

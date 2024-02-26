@@ -3,8 +3,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { getTrips } from "../../redux/selectors";
 import { removeTrip } from '../../redux/slice';
 import Modal from "../../components/modal/Modal";
-import { getWeatherData } from "../../redux/selectors";
-import { setWeatherData } from "../../redux/slice";
+import { getWeatherData, getCurrentWeather } from "../../redux/selectors";
+import { setWeatherData, setCurrentWeather } from "../../redux/slice";
 import DataTimer from "../../components/timer/DataTimer";
 import './main.css';
 
@@ -18,7 +18,7 @@ function Main() {
   // unvalid
   // const API_KEY = 'TVPXXTTYAYBBW7WF45YWSAJL6';
   // valid
-  const API_KEY = 'GSEVSL93UQVQ6URJBKG5VFDXE';
+  const API_KEY = 'JL766J7HLBJXJYMRDBJJZSCD6';
 
   const trips = useSelector(getTrips);
   // console.log(trips);
@@ -43,7 +43,7 @@ function Main() {
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-      // weather for now // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[city]/today?unitGroup=metric&amp;include=days&amp;key=YOUR_API_KEY
+        // weather for now // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/[city]/today?unitGroup=metric&amp;include=days&amp;key=YOUR_API_KEY
         const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/${arrivalDate}/${departureDate}?key=${API_KEY}`);
         const data = await response.json();
 
@@ -62,7 +62,30 @@ function Main() {
     }
   }, [country, arrivalDate, departureDate, dispatch]);
 
+  useEffect(() => {
+    const fetchCurrentWeather = async () => {
+      try {
+        // weather for now // https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/today?unitGroup=metric&amp;include=days&amp;key=${API_KEY}
+        const currentWeatherresponse = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/today?key=${API_KEY}`);
+        const currentWeatherdata = await currentWeatherresponse.json();
+
+        dispatch(setCurrentWeather(currentWeatherdata));
+        if (country) {
+          fetchCurrentWeather();
+        }
+      } catch (error) {
+        console.error('Помилка отримання даних погоди:', error);
+      }
+    };
+
+    if (country) {
+      fetchCurrentWeather();
+    }
+  }, [country, dispatch])
+
   const weatherData = useSelector(getWeatherData);
+  const currentWeather = useSelector(getCurrentWeather);
+  console.log('cuurent weather', currentWeather);
 
   return (
     <div className="windows">

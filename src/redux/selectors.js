@@ -5,3 +5,5 @@ export const getTripById = (state, id) => {
 };
 
 export const getWeatherData = (state) => state.travel.weatherData;
+
+export const getCurrentWeather = (state) => state.travel.currentWeather;
