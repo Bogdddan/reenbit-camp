@@ -16,9 +16,9 @@ function Main() {
   // const [departureDate, setDepartureDate] = useState('');
 
   // unvalid
-  // const API_KEY = 'TVPXXTTYAYBBW7WF45YWSAJL6';
+  const API_KEY = 'TVPXXTTYAYBBW7WF45YWSAJL6';
   // valid
-  const API_KEY = 'JL766J7HLBJXJYMRDBJJZSCD6';
+  // const API_KEY = 'JL766J7HLBJXJYMRDBJJZSCD6';
 
   const trips = useSelector(getTrips);
   const country = useSelector(getCountry);
