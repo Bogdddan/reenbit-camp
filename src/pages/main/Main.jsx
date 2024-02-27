@@ -5,6 +5,7 @@ import { removeTrip } from '../../redux/slice';
 import Modal from "../../components/modal/Modal";
 import { getWeatherData, getCountry, getArrivalDate, getDepartureDate } from "../../redux/selectors";
 import { setWeatherData, setCountry, setArrivalDate, setDepartureDate } from "../../redux/slice";
+import { fetchWeather } from "../../redux/slice";
 import DataTimer from "../../components/timer/DataTimer";
 import './main.css';
 
@@ -16,7 +17,7 @@ function Main() {
   // const [departureDate, setDepartureDate] = useState('');
 
   // unvalid
-  const API_KEY = 'TVPXXTTYAYBBW7WF45YWSAJL6';
+  // const API_KEY = 'TVPXXTTYAYBBW7WF45YWSAJL6';
   // valid
   // const API_KEY = 'JL766J7HLBJXJYMRDBJJZSCD6';
 
@@ -44,20 +45,7 @@ function Main() {
 
   // Отримайте дані погоди та відобразіть їх
   useEffect(() => {
-    const fetchWeather = async () => {
-      try {
-        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/${arrivalDate}/${departureDate}?key=${API_KEY}`);
-        const data = await response.json();
-
-        console.log(data);
-        dispatch(setWeatherData(data));
-      } catch (error) {
-        console.error('Помилка отримання даних погоди:', error);
-      }
-    };
-
-    fetchWeather();
-
+    dispatch(fetchWeather());
   }, [country, arrivalDate, departureDate, dispatch]);
 
 

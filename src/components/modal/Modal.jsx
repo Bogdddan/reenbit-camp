@@ -27,11 +27,11 @@ function Modal() {
   // Date
   const handleSubmit = () => {
 
-    const errors = {
+    setErrors({
       country: !country,
       arrivalDate: !arrivalDate,
       departureDate: !departureDate,
-    };
+    });
 
     const hasErrors = Object.values(errors).some((error) => error);
 

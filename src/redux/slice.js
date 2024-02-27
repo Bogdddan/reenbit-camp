@@ -1,6 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
-const travelSlice = createSlice({
+export const travelSlice = createSlice({
   name: 'travel',
   initialState: {
     trips: [],
@@ -44,6 +44,14 @@ const travelSlice = createSlice({
   }
 })
 
-export default travelSlice;
+export const fetchWeather = createAsyncThunk(
+  'travel/fetchWeather', // Ім'я дії
+  async (args, { getState }) => {
+    const { country, arrivalDate, departureDate } = getState().travel; // Отримайте стан з Redux
+    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/${arrivalDate}/${departureDate}?key=JL766J7HLBJXJYMRDBJJZSCD6`); // Зробіть запит API
+    const data = await response.json();
+    return data; // Поверніть отримані дані
+  }
+);
 
 export const { addTrip, removeTrip, updateTrip, setWeatherData, setCurrentWeather, setCountry, setArrivalDate, setDepartureDate } = travelSlice.actions;

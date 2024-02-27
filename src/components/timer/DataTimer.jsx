@@ -23,6 +23,9 @@ function DataTimer() {
       const hours = Math.floor(minutes / 60);
       const days = Math.floor(hours / 24);
 
+      if (!arrivalDate) {
+        return;
+      }
       setDays(days);
       setHours(hours);
       setMinutes(minutes);
@@ -30,17 +33,21 @@ function DataTimer() {
     }, 1000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [arrivalDate]);
 
   return (
     <>
       <div>current weather</div>
-      {/* {weatherOneDay.currentConditions.temp} */}
-      <div>time to arrival</div>
-      <div>days {days}</div>
-      <div>hours {hours}</div>
-      <div>minutes {minutes}</div>
-      <div>seconds {seconds}</div>
+      {/* Assuming the relevant logic for displaying weatherOneDay is here */}
+      {weatherOneDay && (
+        <>
+          <div>time to arrival</div>
+          <div>days {days}</div>
+          <div>hours {hours}</div>
+          <div>minutes {minutes}</div>
+          <div>seconds {seconds}</div>
+        </>
+      )}
     </>
   );
 }
