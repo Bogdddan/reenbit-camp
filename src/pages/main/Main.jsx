@@ -4,8 +4,8 @@ import { getTrips } from "../../redux/selectors";
 import { removeTrip } from '../../redux/slice';
 import Modal from "../../components/modal/Modal";
 import { getWeatherData, getCountry, getArrivalDate, getDepartureDate } from "../../redux/selectors";
-import { setCountry, setArrivalDate, setDepartureDate } from "../../redux/slice";
-import { fetchWeather } from "../../redux/slice";
+import { setWeatherData, setCountry, setArrivalDate, setDepartureDate } from "../../redux/slice";
+// import { fetchWeather } from "../../redux/slice";
 import DataTimer from "../../components/timer/DataTimer";
 import './main.css';
 
@@ -36,18 +36,33 @@ function Main() {
   // Filter trips
   const filteredTrips = trips.filter(trip => trip.country.toLowerCase().includes(searchCountry.toLowerCase()));
 
+
+  // Отримайте дані погоди та відобразіть їх
+  useEffect(() => {
+    const fetchWeather = async () => {
+      try {
+        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/${arrivalDate}/${departureDate}?key=JL766J7HLBJXJYMRDBJJZSCD6`);
+        const data = await response.json();
+
+        console.log(data);
+        dispatch(setWeatherData(data));
+      } catch (error) {
+        console.error('Помилка отримання даних погоди:', error);
+      }
+    };
+
+    fetchWeather();
+
+    // dispatch(fetchWeather());
+  }, [country, arrivalDate, departureDate, dispatch]);
+
   const handleCountryClick = (trip) => {
     // console.log(trip.country);
     dispatch(setCountry(trip.country));
     dispatch(setArrivalDate(trip.arrivalDate));
     dispatch(setDepartureDate(trip.departureDate));
-    fetchWeather();
+    // fetchWeather();
   }
-
-  // Отримайте дані погоди та відобразіть їх
-  useEffect(() => {
-    dispatch(fetchWeather());
-  }, [country, arrivalDate, departureDate, dispatch]);
 
 
   const weatherData = useSelector(getWeatherData);
