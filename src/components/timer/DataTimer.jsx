@@ -18,7 +18,7 @@ function DataTimer() {
   const dispatch = useDispatch();
   // console.log('weather 1 day', weatherOneDay);
   // useEffect()
-  console.log('arival', arrivalDate.typeOf);
+  console.log('arival', arrivalDate);
 
     useEffect(() => {
       const fetcCurrentWeather = async () => {
@@ -39,24 +39,31 @@ function DataTimer() {
     const currentWeatherData = useSelector(getCurrentWeather);
     // console.log(currentWeatherData);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      const now = Date.now();
-      const difference = arrivalDate - now;
-      const seconds = Math.floor(difference / 1000);
-      const minutes = Math.floor(seconds / 60);
-      const hours = Math.floor(minutes / 60);
-      const days = Math.floor(hours / 24);
-
-      if (!arrivalDate) return;
-      setDays(days);
-      setHours(hours);
-      setMinutes(minutes);
-      setSeconds(seconds);
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [arrivalDate]);
+    useEffect(() => {
+      const interval = setInterval(() => {
+        const now = Date.now(); // Поточний час в мілісекундах
+        const arrivalTime = new Date(arrivalDate).getTime(); // Перетворюємо рядок дати на числовий тип
+        const difference = arrivalTime - now;
+    
+        if (difference <= 0) {
+          // Якщо різниця менше або дорівнює нулю, зупиняємо таймер
+          clearInterval(interval);
+          return;
+        }
+    
+        const seconds = Math.floor(difference / 1000) % 60;
+        const minutes = Math.floor(difference / (1000 * 60)) % 60;
+        const hours = Math.floor(difference / (1000 * 60 * 60)) % 24;
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+    
+        setDays(days);
+        setHours(hours);
+        setMinutes(minutes);
+        setSeconds(seconds);
+      }, 1000);
+    
+      return () => clearInterval(interval);
+    }, [arrivalDate]);
 
   return (
     <>
