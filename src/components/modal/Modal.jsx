@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { useDispatch, } from "react-redux";
+import { useDispatch, useSelector} from "react-redux";
 import { addTrip } from '../../redux/slice';
+import { getArrivalDate, getDepartureDate, getCountry } from "../../redux/selectors";
+import { setArrivalDate, setDepartureDate, setCountry } from "../../redux/slice";
 import './modal.css';
 
 
@@ -8,15 +10,19 @@ function Modal() {
   // Modal
   const [isOpen, setIsOpen] = useState(false);
   // Date
-  const [country, setCountry] = useState('');
-  const [arrivalDate, setArrivalDate] = useState('');
-  const [departureDate, setDepartureDate] = useState('');
+  // const [country, setCountry] = useState('');
+  // const [arrivalDate, setArrivalDate] = useState('');
+  // const [departureDate, setDepartureDate] = useState('');
   // const trips = useSelector(getTrip);
   const dispatch = useDispatch();
 
   // Modal
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
+
+  const country = useSelector(getCountry);
+  const arrivalDate = useSelector(getArrivalDate);
+  const departureDate = useSelector(getDepartureDate);
   // Are all fields filled in?
   const [errors, setErrors] = useState({
     country: false,
