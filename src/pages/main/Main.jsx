@@ -4,7 +4,7 @@ import { getTrips } from "../../redux/selectors";
 import { removeTrip } from '../../redux/slice';
 import Modal from "../../components/modal/Modal";
 import { getWeatherData, getCountry, getArrivalDate, getDepartureDate } from "../../redux/selectors";
-import { setWeatherData, setCountry, setArrivalDate, setDepartureDate } from "../../redux/slice";
+import { setCountry, setArrivalDate, setDepartureDate } from "../../redux/slice";
 import { fetchWeather } from "../../redux/slice";
 import DataTimer from "../../components/timer/DataTimer";
 import './main.css';
@@ -41,6 +41,7 @@ function Main() {
     dispatch(setCountry(trip.country));
     dispatch(setArrivalDate(trip.arrivalDate));
     dispatch(setDepartureDate(trip.departureDate));
+    fetchWeather();
   }
 
   // Отримайте дані погоди та відобразіть їх

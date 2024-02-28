@@ -43,7 +43,6 @@ function Modal() {
 
 
     const arrivalDateObject = new Date(arrivalDate);
-    console.log('arrivalDateObject', arrivalDateObject);
     const departureDateObject = new Date(departureDate);
 
     if (arrivalDateObject >= departureDateObject) {
