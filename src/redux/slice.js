@@ -1,9 +1,16 @@
-import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice } from "@reduxjs/toolkit";
 
 export const travelSlice = createSlice({
   name: 'travel',
   initialState: {
-    trips: [],
+    trips: [
+      {
+      id: 1, // Додайте унікальне ID
+      country: 'Франція',
+      arrivalDate: '2024-10-26',
+      departureDate: '2024-10-30',
+    }, 
+  ],
     weatherData: null,
     currentWeather: null,
     country: null,
@@ -43,29 +50,5 @@ export const travelSlice = createSlice({
     }
   }
 })
-
-export const fetchWeather = createAsyncThunk(
-  'travel/fetchWeather',
-  async (args, { getState }) => {
-    const { country, arrivalDate, departureDate } = getState().travel;
-    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/${arrivalDate}/${departureDate}?key=JL766J7HLBJXJYMRDBJJZSCD6`);
-    const data = await response.json();
-    console.log(data);
-    setWeatherData(data);
-    return data;
-  }
-);
-
-export const fetchCurrentWeather = createAsyncThunk(
-  'travel/fetchCurrentWeather',
-  async (args, { getState }) => {
-    const { country } = getState().travel;
-    const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/today?key=JL766J7HLBJXJYMRDBJJZSCD6`);
-    const data = await response.json();
-    console.log(data);
-    setCurrentWeather(data);
-    return data;
-  }
-);
 
 export const { addTrip, removeTrip, updateTrip, setWeatherData, setCurrentWeather, setCountry, setArrivalDate, setDepartureDate } = travelSlice.actions;

@@ -1,9 +1,6 @@
 import React, { useState } from "react";
-import { useDispatch} from "react-redux";
+import { useDispatch } from "react-redux";
 import { addTrip } from '../../redux/slice';
-// import { getArrivalDate, getDepartureDate, getCountry } from "../../redux/selectors";
-// import { getTrips } from "../../redux/selectors";
-// import { setArrivalDate, setDepartureDate, setCountry } from "../../redux/slice";
 import './modal.css';
 
 
@@ -14,17 +11,12 @@ function Modal() {
   const [country, setCountry] = useState('');
   const [arrivalDate, setArrivalDate] = useState('');
   const [departureDate, setDepartureDate] = useState('');
-  // const trips = useSelector(getTrips);
   const dispatch = useDispatch();
 
   // Modal
   const handleOpen = () => setIsOpen(true);
   const handleClose = () => setIsOpen(false);
 
-  // const country = useSelector(getCountry);
-  // const arrivalDate = useSelector(getArrivalDate);
-  // const departureDate = useSelector(getDepartureDate);
-  // Are all fields filled in?
   const [errors, setErrors] = useState({
     country: false,
     arrivalDate: false,
@@ -49,19 +41,35 @@ function Modal() {
     }
 
 
+    const today = new Date();
+    const nextFifteenDays = new Date();
+    nextFifteenDays.setDate(today.getDate() + 15);
+
     const arrivalDateObject = new Date(arrivalDate);
     const departureDateObject = new Date(departureDate);
 
+
+    if (arrivalDateObject < today || arrivalDateObject > nextFifteenDays) {
+      alert('Start date should be within the next 15 days.');
+      return;
+    }
+
+    if (departureDateObject < today || departureDateObject > nextFifteenDays) {
+      alert('End date should be within the next 15 days.');
+      return;
+    }
+
     if (arrivalDateObject >= departureDateObject) {
-      alert('Departure date cannot be earlier than arrival date!')
-      return
+      alert('Departure date cannot be earlier than arrival date!');
+      return;
     }
 
     const differenceInDays = Math.floor((departureDateObject - arrivalDateObject) / (1000 * 60 * 60 * 24));
     if (differenceInDays > 15) {
-      alert('Trip cannot be longer than 15 days!')
-      return
+      alert('Trip cannot be longer than 15 days!');
+      return;
     }
+
 
 
     dispatch(addTrip({

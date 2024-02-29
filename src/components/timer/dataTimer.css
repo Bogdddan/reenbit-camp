@@ -1,0 +1,20 @@
+.timer{
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: blue;
+    color: white;
+}
+.timer-list{
+    display: flex;
+    gap: 5px;
+    margin-left: 40px;
+    margin-right: 40px;
+
+}
+.timer-list li{
+    display: flex;
+    text-align: center;
+}
