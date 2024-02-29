@@ -17,7 +17,7 @@ function Main() {
   // const API_KEY = 'JL766J7HLBJXJYMRDBJJZSCD6';
 
   const trips = useSelector(getTrips);
-  console.log(trips);
+  // console.log(trips);
   const country = useSelector(getCountry);
   const arrivalDate = useSelector(getArrivalDate);
   const departureDate = useSelector(getDepartureDate);
@@ -39,7 +39,7 @@ function Main() {
         const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/${arrivalDate}/${departureDate}?key=TVPXXTTYAYBBW7WF45YWSAJL6`);
         const data = await response.json();
 
-        console.log(data);
+        // console.log(data);
         dispatch(setWeatherData(data));
       } catch (error) {
         console.error('Помилка отримання даних погоди:', error);

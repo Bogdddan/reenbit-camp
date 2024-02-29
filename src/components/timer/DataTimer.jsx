@@ -22,7 +22,7 @@ function DataTimer() {
       try {
         const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/today?key=JL766J7HLBJXJYMRDBJJZSCD6`);
         const data = await response.json();
-        console.log(data);
+        // console.log(data);
         dispatch(setCurrentWeather(data));
       } catch (error) {
         console.error('Помилка отримання даних погоди:', error);
