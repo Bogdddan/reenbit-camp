@@ -34,14 +34,14 @@ function Main() {
   };
 
   // Filter trips
-  const filteredTrips = trips.filter(trip => trip.country.toLowerCase().includes(searchCountry.toLowerCase()));
+  const filteredTrips = trips.filter(trip => trip?.country?.toLowerCase().includes(searchCountry.toLowerCase()));
 
 
   // Отримайте дані погоди та відобразіть їх
   useEffect(() => {
     const fetchWeather = async () => {
       try {
-        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/${arrivalDate}/${departureDate}?key=JL766J7HLBJXJYMRDBJJZSCD6`);
+        const response = await fetch(`https://weather.visualcrossing.com/VisualCrossingWebServices/rest/services/timeline/${country}/${arrivalDate}/${departureDate}?key=TVPXXTTYAYBBW7WF45YWSAJL6`);
         const data = await response.json();
 
         console.log(data);
